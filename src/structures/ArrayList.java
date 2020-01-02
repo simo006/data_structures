@@ -25,7 +25,7 @@ public class ArrayList<T> implements Iterable<T> {
     }
 
     public void add(T element, int index) {
-        validateIndex(index);
+        this.validateIndex(index);
 
         //update array list size
         if (this.arr.length == this.size) {
@@ -47,7 +47,7 @@ public class ArrayList<T> implements Iterable<T> {
     }
 
     public void addAll(ArrayList<T> array, int index) {
-        validateIndex(index);
+        this.validateIndex(index);
 
         //update array list size
         while (array.size() + this.size > this.arr.length) {
@@ -65,7 +65,7 @@ public class ArrayList<T> implements Iterable<T> {
     }
 
     public T get(int index) {
-        validateIndex(index);
+        this.validateIndex(index);
 
         return convertInstanceOfObject(this.arr[index]);
     }
@@ -81,13 +81,13 @@ public class ArrayList<T> implements Iterable<T> {
     }
 
     public void set(T element, int index) {
-        validateIndex(index);
+        this.validateIndex(index);
 
         this.arr[index] = element;
     }
 
     public T remove(int index) {
-        validateIndex(index);
+        this.validateIndex(index);
 
         this.size--;
 
@@ -117,30 +117,15 @@ public class ArrayList<T> implements Iterable<T> {
     }
 
     public ArrayList<T> subList(int fromIndex, int toIndex) {
+        this.validateIndex(fromIndex);
+        this.validateIndex(toIndex);
+
         ArrayList<T> newArray = new ArrayList<>();
         for (int i = fromIndex; i < toIndex; i++) {
             newArray.add(convertInstanceOfObject(this.arr[i]));
         }
 
         return newArray;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder string = new StringBuilder();
-        string.append("{");
-        for (int i = 0; i < this.size; i++) {
-            string.append(" ").append(this.arr[i]);
-
-            if (i < this.size() - 1) {
-                string.append(",");
-            }
-
-            string.append(" ");
-        }
-        string.append("}");
-
-        return string.toString();
     }
 
     private void resize() {
@@ -165,6 +150,24 @@ public class ArrayList<T> implements Iterable<T> {
         } catch (ClassCastException e) {
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("{");
+        for (int i = 0; i < this.size; i++) {
+            string.append(" ").append(this.arr[i]);
+
+            if (i < this.size - 1) {
+                string.append(",");
+            }
+
+            string.append(" ");
+        }
+        string.append("}");
+
+        return string.toString();
     }
 
     @NotNull

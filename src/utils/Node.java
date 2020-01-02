@@ -1,6 +1,6 @@
-package structures;
+package utils;
 
-class Node<T> {
+public class Node<T> {
     private T value;
     private Node<T> nextNode, prevNode;
 
@@ -16,6 +16,10 @@ class Node<T> {
 
     public Node(T value) {
         this(value, null, null);
+    }
+
+    public void setValue(T value) {
+        this.value = value;
     }
 
     public T getValue() {
